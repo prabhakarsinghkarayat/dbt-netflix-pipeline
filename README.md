@@ -52,7 +52,7 @@ Follow these steps to spin up the local development environment and run the data
 ```bash
 git clone [https://github.com/YOUR_USERNAME/dbt-netflix-pipeline.git](https://github.com/YOUR_USERNAME/dbt-netflix-pipeline.git)
 cd netflix_project
-
+```bash
 
 2. Set Up Virtual Environment & Install Dependencies
 Create an isolated Python environment to keep dependencies clean and prevent version conflicts:
