@@ -121,11 +121,6 @@ Popularity Index = (Average Rating * 0.6) + (log10(Total Reviews + 1) * 0.4)
 
 ## 👥 Professional Profile
 
-#### Developer: 
-Prabhakar Karayat
-
-#### Role: 
-Data Engineering 
-
-#### Expertise: 
-Advanced SQL Analytics, Cloud Migrations, Data Validation, PySpark, Python
+Developer: Prabhakar Karayat
+Role: Data Engineering 
+Expertise: Advanced SQL Analytics, Cloud Migrations, Data Validation, PySpark, Python
