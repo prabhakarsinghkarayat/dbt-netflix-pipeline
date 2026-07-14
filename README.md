@@ -52,11 +52,12 @@ Follow these steps to spin up the local development environment and run the data
 ```bash
 git clone [https://github.com/YOUR_USERNAME/dbt-netflix-pipeline.git](https://github.com/YOUR_USERNAME/dbt-netflix-pipeline.git)
 cd netflix_project
-```bash
+```
 
 2. Set Up Virtual Environment & Install Dependencies
 Create an isolated Python environment to keep dependencies clean and prevent version conflicts:
 
+```bash
 # Create the environment
 python3 -m venv venv
 
@@ -65,11 +66,12 @@ source venv/bin/activate
 
 # Install dbt-snowflake adapter (installs dbt-core automatically)
 pip install dbt-snowflake==1.11.0
-
+```
 
 3. Configure dbt Profiles (profiles.yml)
 dbt expects authentication tokens inside a hidden file located in your user directory (~/.dbt/profiles.yml). Create or update this file with your Snowflake developer details:
 
+```bash
 netflix_project:
   outputs:
     dev:
@@ -83,11 +85,12 @@ netflix_project:
       schema: public
       threads: 4
   target: dev
-
+```
 
 🏃 Run the Data Pipeline
 Once connected, execute the following build pipeline steps using the dbt CLI:
 
+```bash
 # Compile and build the staging layers only
 dbt run --select staging
 
@@ -96,18 +99,19 @@ dbt run --select dim_movies
 
 # Execute the entire end-to-end data pipeline
 dbt run
-
+```
 
 🧬 Advanced Analytics & Engineering Highlight
 Enterprise Deduplication (QUALIFY)
 To guarantee strict granularity enforcement inside stg_links.sql, the pipeline replaces slow, nested subqueries with Snowflake's native QUALIFY clause paired with programmatic sorting order constraints:
 
+```bash
 QUALIFY ROW_NUMBER() OVER (PARTITION BY movie_id ORDER BY tmdb_id DESC NULLS LAST) = 1
-
+```
 
 The Movie Popularity Log IndexInside the Fact Layer, raw metrics are mapped against an advanced quantitative equation balancing critical sentiment against engagement volume using a base-10 logarithmic scaling index to prevent low-sample size ranking distortions:
 
-$$\text{Popularity Index} = (\text{Average Rating} \times 0.6) + (\log_{10}(\text{Total Reviews} + 1) \times 0.4)$$
+Popularity Index = (Average Rating * 0.6) + (log10(Total Reviews + 1) * 0.4)
 
 
 👥 Professional Profile
