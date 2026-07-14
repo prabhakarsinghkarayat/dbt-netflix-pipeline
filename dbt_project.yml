@@ -34,6 +34,6 @@ models:
     # Config indicated by + and applies to all files under models/example/
     staging:
       +materialized: view   # All files in the staging folder will be Views
-    #marts:
-      #+materialized: table  # Downstream dim and fct layers will be physical Tables
+    marts:
+      +materialized: table  # Downstream dim and fct layers will be physical Tables
  
