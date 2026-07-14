@@ -21,5 +21,5 @@ data_quality_enforcement AS (
         END AS tag
     FROM renamed
 )
-SELECT * FROM data_quality_enforcement
+SELECT * FROM data_quality_enforcement WHERE tag IS NOT NULL
 
