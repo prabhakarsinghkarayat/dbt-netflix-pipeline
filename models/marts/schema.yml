@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  # =========================================================================
+  # 🏛️ DIMENSIONS (The Context Nouns)
+  # =========================================================================
+  - name: dim_movies
+    description: "The master content catalog dimension table containing structured genre arrays, vintage era cohorts, and clean boolean markers."
+    columns:
+      - name: movie_id
+        description: "The primary key identifier for the content item."
+        tests:
+          - unique
+          - not_null
+      - name: movie_title
+        description: "The normalized, string-trimmed title of the film."
+      - name: release_year
+        description: "The explicitly parsed four-digit release year extracted from the catalog metadata."
+      - name: is_classic_era
+        description: "A boolean indicator flagging whether a movie belongs to the vintage classic cinema cohort."
+
+  - name: dim_users
+    description: "Derived user profiling dimension mapping comprehensive customer engagement lifecycles and historical sentiment tiers."
+    columns:
+      - name: user_id
+        description: "The unique primary key identity mapping the platform user footprint."
+        tests:
+          - unique
+          - not_null
+      - name: total_movies_rated
+        description: "The total lifetime volume of interactions submitted by this user."
+      - name: average_rating_given
+        description: "The historical mean score issued by the user across all reviews."
+      - name: user_sentiment_tier
+        description: "A categorical behavioral tier segmenting users based on their scoring patterns (e.g., Critical, Balanced, Generous)."
+
+  - name: dim_tags
+    description: "Metadata bridge dimension joining unstructured community tags with the formal system genome catalog while tracking interaction volume metrics."
+    columns:
+      - name: tag_name
+        description: "The unique primary textual key mapping the descriptive keyword attribute."
+        tests:
+          - unique
+          - not_null
+      - name: total_tag_applications_count
+        description: "The total historical volume of times this keyword has been applied across the platform."
+
+  # =========================================================================
+  # ⚡ FACTS (The Quantitative Engine)
+  # =========================================================================
+  - name: fct_movie_performance
+    description: "The central quantitative metrics engine aggregating critical performance distributions and the enterprise log-scaled popularity index."
+    columns:
+      - name: movie_id
+        description: "Foreign key connecting directly back to the dim_movies dimension table."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_movies')
+              field: movie_id
+      - name: total_reviews
+        description: "Total volume of individual user ratings logged against this movie."
+      - name: average_rating
+        description: "The mean customer satisfaction score, cleanly rounded to two decimal places."
+      - name: total_five_star_ratings
+        description: "A conditional distribution metric counting the exact volume of maximum tier scores received."
+      - name: total_low_tier_ratings
+        description: "A conditional distribution metric counting the volume of poor scores (<= 2.0) received."
+      - name: popularity_index
+        description: "An advanced corporate KPI balancing core text sentiment against log-10 engagement volume constraints."
